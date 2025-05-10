@@ -1,0 +1,83 @@
+
+
+    <!-- Start Trending Product Area -->
+    <section class="trending-product section" style="margin-top: 12px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2>Discounted Products</h2>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                            suffered alteration in some form.</p>
+                    </div>
+                </div>
+            </div>
+            <a href="{{route('frontend.product.recent')}}" class="text-decoration-none"> <span class="card border-0 d-inline ms-3 fs-6">See more</span></a> <div class="border-btm mb-3 mt-2"></div>
+
+
+            <div class="row">
+				@foreach ($features as $feature)
+
+                <div class="col-lg-3 col-md-4 col-12">
+                    <!-- Start Single Product -->
+                    <div class="single-product">
+
+                        <div class="product-image">
+                            <!-- <img src="assets/images/products/product-3.jpg" alt="#"> -->
+                         <img class="flex-img"  src=" {{'allfiles/products_image/'.$feature->image}}" alt="{{$feature->slug}}">
+    
+                         
+                            <div class="button">
+                                <button class="btn cart_route_selection_ajax" type="button " data-route="{{route('cart.store')}}" onclick="add_to_cart({{$feature->id}})"><i class="lni lni-cart"></i> Add to Cart</button>
+                            
+                        </div>
+                        </div>
+
+                        
+                        <div class="product-info">
+                           	@if($feature->category)	
+                             <a href="{{route('frontend.product.products_list_child',$feature->category->slug)}}"><span class="category">{{$feature->category->name}}</span></a>
+                            @endif
+                          
+                            <h4 class="title">
+                                <a href="{{route('frontend.product.show',$feature['slug'])}}">{{ Illuminate\Support\Str::limit($feature->title, 23)}}</a>
+                            </h4>
+                            <ul class="review">
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><span>5.0 Review(s)</span></li>
+                            </ul>
+
+                            @if($feature->sale_price === null && $feature->sale_price <  1)
+                            <div class="price"> <span>৳ {{number_format($feature->price)}}</span> </div>
+                            @else
+                            <div class="price">
+                                <span>৳ {{number_format($feature->sale_price)}}</span>
+                                <span class="discount-price">৳ {{number_format($feature->price)}}</span>
+                            </div>
+                            @endif
+
+
+                    
+                        </div>
+                    </div>
+                    <!-- End Single Product -->
+                </div>
+               
+                @endforeach
+            </div>
+
+
+
+        </div>
+    </section>
+
+    <!-- End Trending Product Area -->
+
+
+
+
+    
